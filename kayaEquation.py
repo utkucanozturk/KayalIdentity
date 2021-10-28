@@ -1,4 +1,4 @@
-def kayaEquation(pop, gdp, energy_intensity, carbon_intensity):
+def kayaEquation(pop, gdp, energy_intensity, carbon_intensity, output_type = 'CO2'):
     '''
     Expresses yearly CO2 emissions as a product of four factors.
     :parameter
@@ -19,5 +19,13 @@ def kayaEquation(pop, gdp, energy_intensity, carbon_intensity):
     if carbon_intensity <0:
         raise ValueError('Input cabon intensity should be positive number!')
     
-    co2 = pop * gdp * energy_intensity * carbon_intensity
+    output_types = ['CO2', 'C']
+    if output_type not in output_types:
+        raise ValueError('Invalid output type. Expected one of: %s' % output_types)
+    
+    if output_type == 'CO2':
+        co2 = pop * gdp * energy_intensity * carbon_intensity
+    else:
+        co2 = pop * gdp * energy_intensity * carbon_intensity / 3.67
+        
     return co2
